@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation"
+    app:startDestination="@id/fragmentListOfPlants">
+
+    <fragment
+        android:id="@+id/fragmentListOfPlants"
+        android:name="pl.edu.uwr.pum.gardenway.plants.ListOfPlantsFragment"
+        android:label="Plants List"
+        tools:layout="@layout/fragment_list_of_plants">
+        <action
+            android:id="@+id/action_fragmentListOfPlants_to_fragmentPlantDetail"
+            app:destination="@id/fragmentPlantDetail" />
+        <action
+            android:id="@+id/action_fragmentListOfPlants_to_fragmentPlantDetail2"
+            app:destination="@id/fragmentPlantDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentPlantDetail"
+        android:name="pl.edu.uwr.pum.gardenway.plants.PlantDetailFragment"
+        android:label="Plant Details"
+        tools:layout="@layout/fragment_plant_detail">
+        <fragment
+            android:id="@+id/fragmentPlantDetail"
+            android:name="pl.edu.uwr.pum.gardenway.plants.PlantDetailFragment"
+            android:label="Plant Details"
+            tools:layout="@layout/fragment_detail">
+            <action
+                android:id="@+id/to_fragmentListOfPlants"
+                app:destination="@id/fragmentListOfPlants" />
+        </fragment>
+        <action
+            android:id="@+id/action_fragmentPlantDetail_to_fragmentListOfPlants2"
+            app:destination="@id/fragmentListOfPlants" />
+    </fragment>
+    <fragment
+        android:id="@+id/listOfNotesFragment"
+        android:name="pl.edu.uwr.pum.gardenway.notes.ListOfNotesFragment"
+        android:label="Notes"
+        tools:layout="@layout/fragment_note" >
+        <action
+            android:id="@+id/action_listOfNotesFragment_to_noteDetailFragment"
+            app:destination="@id/noteDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/noteDetailFragment"
+        android:name="pl.edu.uwr.pum.gardenway.notes.NoteDetailFragment"
+        android:label="NoteDetailFragment" >
+        <action
+            android:id="@+id/action_noteDetailFragment_to_listOfNotesFragment"
+            app:destination="@id/listOfNotesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="pl.edu.uwr.pum.gardenway.plants.stats.StatsFragment"
+        android:label="Statistics" />
+</navigation>

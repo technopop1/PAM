@@ -1,0 +1,15 @@
+28 kwietnia :
+ - lista plantacji,
+ - szczeógłowy widok rośliny wraz z obsługą edycji, usuwania, dodawania,
+ - lista notatek,
+ - kalendarz z notatkami przypminajkami
+ 
+
+26 maja :
+ - statystyki ogrodu,
+ - dane pogodowe,
+ - inne funkcjonalności
+
+7 czerwca : 
+ - design,
+ - dokończeniówka,

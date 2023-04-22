@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".plants.PlantDetailFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_to_fragmentListOfPlants"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginStart="40dp"
+            android:clickable="true"
+            android:contentDescription="back_to_fragmentListOfPlants"
+            android:src="@android:drawable/arrow_up_float"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <EditText
+            android:id="@+id/plant_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="148dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="clip_horizontal"
+            android:text="plant name: "
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/plant_date_"
+            android:layout_width="170dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="clip_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="plant date: "
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plant_title" />
+
+        <TextView
+            android:id="@+id/plant_date"
+            android:layout_width="234dp"
+            android:layout_height="35dp"
+            android:gravity="clip_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="plant date: "
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/plant_date_"
+            app:layout_constraintTop_toBottomOf="@+id/plant_title" />
+
+        <TextView
+            android:id="@+id/_last_watering_date"
+            android:layout_width="170dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="clip_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="last watering: "
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plant_date" />
+
+        <TextView
+            android:id="@+id/last_watering_date"
+            android:layout_width="234dp"
+            android:layout_height="35dp"
+            android:gravity="clip_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="last watering date: "
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/_last_watering_date"
+            app:layout_constraintTop_toBottomOf="@+id/plant_date" />
+
+        <EditText
+            android:id="@+id/watering_intervals"
+            android:layout_width="180dp"
+            android:layout_height="45dp"
+            android:gravity="clip_horizontal"
+            android:inputType="number"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="0"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.636"
+            app:layout_constraintStart_toEndOf="@+id/_watering_intervals"
+            app:layout_constraintTop_toBottomOf="@+id/last_watering_date" />
+
+        <TextView
+            android:id="@+id/_watering_intervals"
+            android:layout_width="225dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:gravity="clip_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="watering intervals: "
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/species"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/_last_watering_date" />
+
+        <TextView
+            android:id="@+id/_species"
+            android:layout_width="125dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="clip_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="gatunek: "
+            android:textSize="25sp"
+            app:layout_constraintBottom_toTopOf="@+id/sector"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/_watering_intervals"
+            app:layout_constraintVertical_bias="0.473" />
+
+        <EditText
+            android:id="@+id/species"
+            android:layout_width="270dp"
+            android:layout_height="45dp"
+            android:gravity="clip_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text=""
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/_species"
+            app:layout_constraintTop_toBottomOf="@+id/watering_intervals" />
+
+        <TextView
+            android:id="@+id/_sector"
+            android:layout_width="125dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="clip_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="sector: "
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/species" />
+
+        <EditText
+            android:id="@+id/sector"
+            android:layout_width="270dp"
+            android:layout_height="45dp"
+            android:gravity="clip_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text=""
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/_sector"
+            app:layout_constraintTop_toBottomOf="@+id/species" />
+
+        <TextView
+            android:id="@+id/_cost"
+            android:layout_width="125dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:gravity="clip_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="cost: "
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sector" />
+
+        <EditText
+            android:id="@+id/cost"
+            android:layout_width="270dp"
+            android:layout_height="45dp"
+            android:gravity="clip_horizontal"
+            android:inputType="number"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="0"
+            android:textSize="25sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/_sector"
+            app:layout_constraintTop_toBottomOf="@+id/sector" />
+
+        <EditText
+            android:id="@+id/plantDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="clip_horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="plantDescription"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sector"
+            tools:layout_editor_absoluteX="0dp" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/deleteLayout"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/delete_message"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:layout_marginTop="4dp"
+                android:textAlignment="center"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:text="DELETE"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:layout_marginBottom="4dp"
+                android:src="@drawable/trash"
+                android:text="trash"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/delete_message" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/waterLayout"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="5dp"
+            app:layout_constraintEnd_toStartOf="@+id/deleteLayout"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/water_button"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_margin="5dp"
+                android:layout_marginTop="4dp"
+                android:textAlignment="center"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                android:text="WATER"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:src="@drawable/waterdrop"
+                android:text="water"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/water_button" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/plant_waterDemand"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:text="water"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/waterLayout"
+            app:layout_constraintEnd_toStartOf="@+id/waterLayout"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
