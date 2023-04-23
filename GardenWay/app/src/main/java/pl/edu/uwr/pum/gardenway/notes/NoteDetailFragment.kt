@@ -9,13 +9,14 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import pl.edu.uwr.pum.gardenway.NoteEntity
 import pl.edu.uwr.pum.gardenway.R
 
 class NoteDetailFragment : Fragment() {
-    private val noteViewModel: NotesViewModel by viewModels()
+    private val notesViewModel: NotesViewModel by viewModels()
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
 
@@ -37,10 +38,15 @@ class NoteDetailFragment : Fragment() {
     private fun setDeleteButtonListener(view: View) {
         val deleteLayout : ConstraintLayout = view.findViewById(R.id.deleteLayout)
         deleteLayout.setOnClickListener {
-            println("USUWAMMMMMMMMMMMMMMM")
-            noteViewModel.delete(arguments?.getLong("ID_KEY")!!)
-            Navigation.findNavController(view)
-                .navigate(NoteDetailFragmentDirections.actionNoteDetailFragmentToListOfNotesFragment())
+            notesViewModel.delete(arguments?.getLong("ID_KEY")!!)
+            notesViewModel.getAllNotes.observe(viewLifecycleOwner, Observer { notesViewModel.getAllNotes })
+            if (arguments?.get("NOTE_CALENDAR_STATE")?.equals("calendar_route") == true) {
+                Navigation.findNavController(view)
+                    .navigate(NoteDetailFragmentDirections.actionNoteDetailFragmentToCalendarFragment())
+            } else {
+                Navigation.findNavController(view)
+                    .navigate(NoteDetailFragmentDirections.actionNoteDetailFragmentToListOfNotesFragment())
+            }
         }
     }
 
@@ -49,7 +55,7 @@ class NoteDetailFragment : Fragment() {
         view.findViewById<FloatingActionButton>(R.id.fab_to_fragmentListOfPlants)
             .setOnClickListener {
                 Thread {
-                    noteViewModel.update(
+                    notesViewModel.update(
                         NoteEntity(
                             arguments?.getLong("ID_KEY")!!,
                             noteTitle.text.toString(),
@@ -58,8 +64,13 @@ class NoteDetailFragment : Fragment() {
                         )
                     )
                 }.start()
-                Navigation.findNavController(view)
-                    .navigate(NoteDetailFragmentDirections.actionNoteDetailFragmentToListOfNotesFragment())
+                if (arguments?.get("NOTE_CALENDAR_STATE")?.equals("calendar_route") == true) {
+                    Navigation.findNavController(view)
+                        .navigate(NoteDetailFragmentDirections.actionNoteDetailFragmentToCalendarFragment())
+                } else {
+                    Navigation.findNavController(view)
+                        .navigate(NoteDetailFragmentDirections.actionNoteDetailFragmentToListOfNotesFragment())
+                }
             }
     }
 

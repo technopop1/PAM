@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,7 +27,7 @@ class ListOfNotesFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         adapter = NotesAdapter(notesViewModel, NotesComparator())
-        notesViewModel.getAllPlants.observe(viewLifecycleOwner) {
+        notesViewModel.getAllNotes.observe(viewLifecycleOwner) {
             tasks -> tasks?.let { adapter.submitList(it) }
         }
 
@@ -42,13 +40,13 @@ class ListOfNotesFragment : Fragment() {
     private fun setFabOnClick(view: View) {
         val fab = view.findViewById<FloatingActionButton>(R.id.note_fab)
         fab.setOnClickListener {
-            var num = notesViewModel.getAllPlants.value?.maxByOrNull { it.id }?.id
+            var num = notesViewModel.getAllNotes.value?.maxByOrNull { it.id }?.id
             num = if (num != null) num + 1 else 0
 
             val task = NoteEntity(num, "Note #$num", LocalDate.now().toString(), "<Opis>" )
 
             notesViewModel.insert(task)
-            notesViewModel.getAllPlants.observe(viewLifecycleOwner) { tasks ->
+            notesViewModel.getAllNotes.observe(viewLifecycleOwner) { tasks ->
                 tasks?.let { adapter.submitList(it) }
             }
 

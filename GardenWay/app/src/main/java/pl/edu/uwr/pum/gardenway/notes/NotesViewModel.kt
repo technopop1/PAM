@@ -10,11 +10,11 @@ import pl.edu.uwr.pum.gardenway.NoteEntity
 
 class NotesViewModel(application: Application) : AndroidViewModel(application) {
     private val db : GardenRoomDatabase
-    val getAllPlants : LiveData<List<NoteEntity>>
+    val getAllNotes : LiveData<List<NoteEntity>>
 
     init {
         db = GardenRoomDatabase.getDatabase(application)
-        getAllPlants = db.noteDao().getNotes()
+        getAllNotes = db.noteDao().getNotes()
     }
 
     fun insert(noteEntity : NoteEntity) {
@@ -33,5 +33,13 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             db.noteDao().update(entity)
         }
+    }
+
+    fun getLastNote() : NoteEntity? {
+        return db.noteDao().getLastNote()
+    }
+
+    fun getNoteById(noteId : Long) : NoteEntity {
+        return db.noteDao().getNoteById(noteId)
     }
 }

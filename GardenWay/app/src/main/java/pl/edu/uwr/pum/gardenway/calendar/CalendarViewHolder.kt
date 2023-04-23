@@ -20,10 +20,14 @@ class CalendarViewHolder internal constructor(itemView: View, onItemListener: On
         itemView.setOnClickListener(this)
     }
 
-    override fun onClick(view: View) {
-
+    fun bind(){
+        dayOfMonth = itemView.findViewById(R.id.cellDayText)
         val cellDayLayout : LinearLayout = itemView.findViewById(R.id.cellDayLayout)
         cellDayLayout.setBackgroundColor(R.color.blue)
+    }
+
+    override fun onClick(view: View) {
+
         onItemListener.onItemClick(adapterPosition, dayOfMonth.text as String)
     }
 }

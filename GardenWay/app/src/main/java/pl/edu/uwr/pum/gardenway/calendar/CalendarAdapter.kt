@@ -34,25 +34,14 @@ internal class CalendarAdapter(
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
         holder.dayOfMonth.text = daysOfMonth[position]
         if (daysOfMonth[position] != "") {
-//            val calendarNoteByDate = taskViewModel.getCalendarNoteByDate(
-//                daysOfMonth[position] + "/" + monthYearText.toString().replace(' ', '/')
-//            )
-//            println()
-//            if (calendarNoteByDate != null && calendarNoteByDate.value != null
-//                && calendarNoteByDate.value!!.isNotEmpty()
-//            ){
-//                println(calendarNoteByDate.value?.get(0)?.noteDate)
-//                val cellDayLayout : LinearLayout = view.findViewById(R.id.cellDayLayout)
-//                cellDayLayout.setBackgroundColor(R.color.blue)
-//            }
-            // PRZENIESC DO CREATE
+            var dateOfCell = daysOfMonth[position] + "/" + monthYearText?.text.toString().replace(' ', '/')
+            Thread{
+                val calendarNoteByDate = taskViewModel.getCalendarNoteByDate(dateOfCell)
+                if (calendarNoteByDate != null){
+                    holder.bind()
+                }
+            }.start()
         }
-//        holder.bind(taskViewModel)
-//        if (taskViewModel != null)
-//            taskViewModel.insert(CalendarNoteEntity(0, daysOfMonth[position]+"/"+monthYearText.toString().replace(' ', '/')))
-//        println(position)`
-//        task = taskViewModel.get
-//        holder.bind()
     }
 
     override fun getItemCount(): Int {

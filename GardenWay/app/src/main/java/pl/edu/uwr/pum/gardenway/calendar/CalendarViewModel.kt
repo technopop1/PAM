@@ -35,7 +35,7 @@ class CalendarViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    fun getCalendarNoteByDate(date : String) : LiveData<List<CalendarNoteEntity>>? {
+    fun getCalendarNoteByDate(date : String) : CalendarNoteEntity? {
         return db.calendarNoteDao().getCalendarNoteByDate(date)
     }
 

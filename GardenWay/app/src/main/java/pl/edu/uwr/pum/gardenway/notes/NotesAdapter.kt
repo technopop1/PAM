@@ -3,7 +3,6 @@ package pl.edu.uwr.pum.gardenway.notes
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
@@ -44,14 +43,14 @@ class NotesAdapter(private val notesViewModel: NotesViewModel, notesComparator: 
 
     override fun getItemId(position: Int): Long = position.toLong()
 
-    override fun getItemCount() = notesViewModel.getAllPlants.value?.toMutableList()?.size ?: mutableListOf<NoteEntity>().size
+    override fun getItemCount() = notesViewModel.getAllNotes.value?.toMutableList()?.size ?: mutableListOf<NoteEntity>().size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         return TaskViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.note_item, parent, false) )
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        val tasks = notesViewModel.getAllPlants.value?.get(position)!!
+        val tasks = notesViewModel.getAllNotes.value?.get(position)!!
         holder.bind(tasks)
     }
 }

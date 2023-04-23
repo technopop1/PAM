@@ -51,6 +51,9 @@
         <action
             android:id="@+id/action_noteDetailFragment_to_listOfNotesFragment"
             app:destination="@id/listOfNotesFragment" />
+        <action
+            android:id="@+id/action_noteDetailFragment_to_calendarFragment"
+            app:destination="@id/calendarFragment" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"
@@ -59,5 +62,9 @@
     <fragment
         android:id="@+id/calendarFragment"
         android:name="pl.edu.uwr.pum.gardenway.calendar.CalendarFragment"
-        android:label="Calendar" />
+        android:label="Calendar" >
+        <action
+            android:id="@+id/action_calendarFragment_to_noteDetailFragment"
+            app:destination="@id/noteDetailFragment" />
+    </fragment>
 </navigation>

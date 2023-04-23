@@ -54,6 +54,12 @@ interface NoteDaO {
     @Query("SELECT * FROM NOTES ORDER BY id")
     fun getNotes() : LiveData<List<NoteEntity>>
 
+    @Query("SELECT * FROM NOTES ORDER BY id DESC LIMIT 1")
+    fun getLastNote() : NoteEntity
+
+    @Query("SELECT * FROM NOTES WHERE ID=:noteid")
+    fun getNoteById(noteid : Long) : NoteEntity
+
 }
 
 @Dao
@@ -73,8 +79,8 @@ interface CalendarNotesDaO {
     fun getCalendarNotes() : LiveData<List<CalendarNoteEntity>>
 
     // w założeniu 1 notatka na dzień z kalendarza
-    @Query("SELECT * FROM CALENDAR_NOTES WHERE NOTE_DATE= :noteDate")
-    fun getCalendarNoteByDate(noteDate : String) : LiveData<List<CalendarNoteEntity>>?
+    @Query("SELECT * FROM CALENDAR_NOTES WHERE NOTE_DATE=:noteDate")
+    fun getCalendarNoteByDate(noteDate : String) : CalendarNoteEntity?
 
     @Query("SELECT * FROM CALENDAR_NOTES ORDER BY ID DESC LIMIT 1")
     fun getLastElement() : CalendarNoteEntity?
