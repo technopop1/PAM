@@ -56,4 +56,8 @@
         android:id="@+id/statsFragment"
         android:name="pl.edu.uwr.pum.gardenway.plants.stats.StatsFragment"
         android:label="Statistics" />
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="pl.edu.uwr.pum.gardenway.calendar.CalendarFragment"
+        android:label="Calendar" />
 </navigation>

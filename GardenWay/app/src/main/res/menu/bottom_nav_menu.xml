@@ -13,5 +13,9 @@
         android:id="@id/statsFragment"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="Stats" />
+    <item
+        android:id="@id/calendarFragment"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Calendar" />
 
 </menu>

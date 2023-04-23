@@ -4,12 +4,16 @@ import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import pl.edu.uwr.pum.gardenway.calendar.CalendarNoteEntity
 
-@Database(entities = [PlantEntity::class, NoteEntity::class/*, SectorEntity::class*/], version = 1, exportSchema = false)
+@Database(entities = [PlantEntity::class, NoteEntity::class, CalendarNoteEntity::class/*, SectorEntity::class*/], version = 1, exportSchema = false)
 abstract class GardenRoomDatabase : RoomDatabase() {
     abstract fun plantDao() : PlantDao
 
-    abstract fun gardenDao() : GarderDaO
+    abstract fun noteDao() : NoteDaO
+
+    abstract fun calendarNoteDao() : CalendarNotesDaO
 
     companion object {
         @Volatile

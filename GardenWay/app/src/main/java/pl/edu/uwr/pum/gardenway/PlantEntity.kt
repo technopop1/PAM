@@ -1,8 +1,10 @@
 package pl.edu.uwr.pum.gardenway
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-@Entity(tableName = "plant_table"/*, foreignKeys = [ForeignKey(
+@Entity(tableName = "PLANTS"/*, foreignKeys = [ForeignKey(
     entity = SectorEntity::class,
     childColumns = ["ID"],
     parentColumns = ["IDs"]
@@ -20,7 +22,7 @@ data class PlantEntity(
     @ColumnInfo(name = "WATER_DEMAND") val waterDemand : Boolean = false
     ) {
 }
-@Entity(tableName = "garden_calendar")
+@Entity(tableName = "NOTES")
 data class NoteEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "ID") val id: Long,
     @ColumnInfo(name = "NOTE_TITLE") val title: String,

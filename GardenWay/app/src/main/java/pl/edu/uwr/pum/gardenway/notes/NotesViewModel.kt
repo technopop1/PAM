@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import pl.edu.uwr.pum.gardenway.NoteEntity
 import pl.edu.uwr.pum.gardenway.GardenRoomDatabase
+import pl.edu.uwr.pum.gardenway.NoteEntity
 
 class NotesViewModel(application: Application) : AndroidViewModel(application) {
     private val db : GardenRoomDatabase
@@ -14,24 +14,24 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         db = GardenRoomDatabase.getDatabase(application)
-        getAllPlants = db.gardenDao().getNotes()
+        getAllPlants = db.noteDao().getNotes()
     }
 
     fun insert(noteEntity : NoteEntity) {
         viewModelScope.launch {
-            db.gardenDao().insert(noteEntity)
+            db.noteDao().insert(noteEntity)
         }
     }
 
     fun delete(id : Long) {
         viewModelScope.launch {
-            db.gardenDao().delete(id)
+            db.noteDao().delete(id)
         }
     }
 
     fun update(entity: NoteEntity) {
         viewModelScope.launch {
-            db.gardenDao().update(entity)
+            db.noteDao().update(entity)
         }
     }
 }
