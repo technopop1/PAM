@@ -26,8 +26,8 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
     private var monthYearText: TextView? = null
     private var selectedDate: LocalDate? = null
 
-    private val calendarViewModel : CalendarViewModel by viewModels()
-    private val notesViewModel : NotesViewModel by viewModels()
+    private val calendarViewModel: CalendarViewModel by viewModels()
+    private val notesViewModel: NotesViewModel by viewModels()
 
     private lateinit var calendarRecyclerView: RecyclerView
     private lateinit var adapter: CalendarAdapter
@@ -49,7 +49,7 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
     }
 
 
-    private fun initWidgets(view : View) {
+    private fun initWidgets(view: View) {
         calendarRecyclerView = view.findViewById(R.id.calendarRecyclerView)
         monthYearText = view.findViewById(R.id.monthYearTV)
     }
@@ -58,7 +58,9 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
         monthYearText?.text = selectedDate?.let { monthYearFromDate(it) }
         val daysInMonth = selectedDate?.let { daysInMonthArray(it) }
 
-        calendarViewModel.getAllTimeData.observe(viewLifecycleOwner, Observer { calendarViewModel.getAllTimeData })
+        calendarViewModel.getAllTimeData.observe(
+            viewLifecycleOwner,
+            Observer { calendarViewModel.getAllTimeData })
         adapter = daysInMonth?.let { CalendarAdapter(calendarViewModel, it, monthYearText, this) }!!
         val layoutManager: RecyclerView.LayoutManager = GridLayoutManager(context, 7)
         calendarRecyclerView.layoutManager = layoutManager
@@ -88,7 +90,7 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
     }
 
     private fun setPreviousMonthAction(view: View?) {
-        val previousMonthActionButton : Button = view!!.findViewById(R.id.previousMonthActionButton)
+        val previousMonthActionButton: Button = view!!.findViewById(R.id.previousMonthActionButton)
         previousMonthActionButton.setOnClickListener {
             selectedDate = selectedDate?.minusMonths(1)
             setMonthView()
@@ -96,7 +98,7 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
     }
 
     private fun setNextMonthAction(view: View?) {
-        val nextMonthActionButton : Button = view!!.findViewById(R.id.nextMonthActionButton)
+        val nextMonthActionButton: Button = view!!.findViewById(R.id.nextMonthActionButton)
         nextMonthActionButton.setOnClickListener {
             selectedDate = selectedDate?.plusMonths(1)
             setMonthView()
@@ -105,9 +107,10 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
 
     override fun onItemClick(position: Int, dayText: String?) {
         if (dayText != "") {
-            val noteDate = "$dayText/" + selectedDate?.let {monthYearFromDate(it).replace(' ', '/')}
+            val noteDate =
+                "$dayText/" + selectedDate?.let { monthYearFromDate(it).replace(' ', '/') }
 
-            var calendarNoteByDate : CalendarNoteEntity? = null
+            var calendarNoteByDate: CalendarNoteEntity? = null
             Thread {
                 calendarNoteByDate = calendarViewModel.getCalendarNoteByDate(noteDate)
             }.start()
@@ -117,7 +120,7 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
                 createNewCalendarNote(noteDate)
                 view?.let { goToNewTask(it, note) }
             } else {
-                var note : NoteEntity? = null
+                var note: NoteEntity? = null
                 Thread {
                     note = notesViewModel.getNoteById(calendarNoteByDate!!.noteId)
                 }.start()
@@ -129,7 +132,7 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
         }
     }
 
-    private fun createNewNote(noteDate : String): NoteEntity {
+    private fun createNewNote(noteDate: String): NoteEntity {
         val noteEntity = NoteEntity(0, "Note #$noteDate", LocalDate.now().toString(), "<Opis>")
         notesViewModel.insert(noteEntity)
         notesViewModel.getAllNotes.observe(viewLifecycleOwner) { notesViewModel.getAllNotes }
@@ -154,7 +157,7 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
         Thread.sleep(100)
     }
 
-    private fun goToNewTask(view : View, task : NoteEntity){
+    private fun goToNewTask(view: View, task: NoteEntity) {
         val bundle = bundleOf()
         bundle.putLong("ID_KEY", task.id)
         bundle.putString("NOTE_TITLE_KEY", task.title)
@@ -162,6 +165,7 @@ class CalendarFragment : Fragment(), CalendarAdapter.OnItemListener {
         bundle.putString("NOTE_DESCRIPTION_KEY", task.description)
         bundle.putString("NOTE_CALENDAR_STATE", "calendar_route")
 
-        view.findNavController().navigate(R.id.action_calendarFragment_to_noteDetailFragment, bundle)
+        view.findNavController()
+            .navigate(R.id.action_calendarFragment_to_noteDetailFragment, bundle)
     }
 }

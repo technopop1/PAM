@@ -17,25 +17,25 @@ interface PlantDao {
     suspend fun update(plantEntity: PlantEntity)
 
     @Query("DELETE FROM PLANTS WHERE ID= :id")
-    suspend fun delete(id : Long)
+    suspend fun delete(id: Long)
 
     @Query("SELECT * FROM PLANTS ORDER BY id")
-    fun getPlants() : LiveData<List<PlantEntity>>
+    fun getPlants(): LiveData<List<PlantEntity>>
 
     @Query("SELECT * FROM PLANTS ORDER BY id DESC LIMIT 1")
-    fun getLastElement() : PlantEntity
+    fun getLastElement(): PlantEntity
 
     @Query("SELECT * FROM PLANTS WHERE id = :id")
-    fun getElementById(id : Long) : PlantEntity
+    fun getElementById(id: Long): PlantEntity
 
     @Query("SELECT COUNT(DISTINCT species) FROM PLANTS")
-    fun getNumberOfSpecies() : Int
+    fun getNumberOfSpecies(): Int
 
     @Query("SELECT SUM(cost) FROM PLANTS")
-    fun getTotalKnownCost() : Float
+    fun getTotalKnownCost(): Float
 
     @Query("SELECT COUNT(id) FROM PLANTS")
-    fun getNumberOfPlants() : Int
+    fun getNumberOfPlants(): Int
 }
 
 @Dao
@@ -49,16 +49,16 @@ interface NoteDaO {
     suspend fun update(noteEntity: NoteEntity)
 
     @Query("DELETE FROM NOTES WHERE ID= :id")
-    suspend fun delete(id : Long)
+    suspend fun delete(id: Long)
 
     @Query("SELECT * FROM NOTES ORDER BY id")
-    fun getNotes() : LiveData<List<NoteEntity>>
+    fun getNotes(): LiveData<List<NoteEntity>>
 
     @Query("SELECT * FROM NOTES ORDER BY id DESC LIMIT 1")
-    fun getLastNote() : NoteEntity
+    fun getLastNote(): NoteEntity
 
     @Query("SELECT * FROM NOTES WHERE ID=:noteid")
-    fun getNoteById(noteid : Long) : NoteEntity
+    fun getNoteById(noteid: Long): NoteEntity
 
 }
 
@@ -73,18 +73,18 @@ interface CalendarNotesDaO {
     suspend fun update(noteEntity: CalendarNoteEntity)
 
     @Query("DELETE FROM CALENDAR_NOTES WHERE ID= :id")
-    suspend fun delete(id : Long)
+    suspend fun delete(id: Long)
 
     @Query("SELECT * FROM CALENDAR_NOTES ORDER BY ID")
-    fun getCalendarNotes() : LiveData<List<CalendarNoteEntity>>
+    fun getCalendarNotes(): LiveData<List<CalendarNoteEntity>>
 
     // w założeniu 1 notatka na dzień z kalendarza
     @Query("SELECT * FROM CALENDAR_NOTES WHERE NOTE_DATE=:noteDate")
-    fun getCalendarNoteByDate(noteDate : String) : CalendarNoteEntity?
+    fun getCalendarNoteByDate(noteDate: String): CalendarNoteEntity?
 
     @Query("SELECT * FROM CALENDAR_NOTES ORDER BY ID DESC LIMIT 1")
-    fun getLastElement() : CalendarNoteEntity?
+    fun getLastElement(): CalendarNoteEntity?
 
     @Query("SELECT * FROM CALENDAR_NOTES ORDER BY ID")
-    fun getAllElements() : List<CalendarNoteEntity>
+    fun getAllElements(): List<CalendarNoteEntity>
 }

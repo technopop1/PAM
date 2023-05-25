@@ -67,4 +67,8 @@
             android:id="@+id/action_calendarFragment_to_noteDetailFragment"
             app:destination="@id/noteDetailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/forecastFragment"
+        android:name="pl.edu.uwr.pum.gardenway.forecast.ForecastFragment"
+        android:label="Forecast" />
 </navigation>

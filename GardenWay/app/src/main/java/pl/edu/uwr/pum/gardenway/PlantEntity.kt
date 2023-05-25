@@ -4,11 +4,13 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "PLANTS"/*, foreignKeys = [ForeignKey(
+@Entity(
+    tableName = "PLANTS"/*, foreignKeys = [ForeignKey(
     entity = SectorEntity::class,
     childColumns = ["ID"],
     parentColumns = ["IDs"]
-)]*/)
+)]*/
+)
 data class PlantEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "ID") val id: Long,
     @ColumnInfo(name = "PLANT_NAME") val title: String,
@@ -19,9 +21,10 @@ data class PlantEntity(
     @ColumnInfo(name = "SECTOR") val sector: String,
     @ColumnInfo(name = "COST") val cost: Float,
     @ColumnInfo(name = "DESCRIPTION") val description: String,
-    @ColumnInfo(name = "WATER_DEMAND") val waterDemand : Boolean = false
-    ) {
+    @ColumnInfo(name = "WATER_DEMAND") val waterDemand: Boolean = false
+) {
 }
+
 @Entity(tableName = "NOTES")
 data class NoteEntity(
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "ID") val id: Long,

@@ -6,25 +6,24 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import pl.edu.uwr.pum.gardenway.GardenRoomDatabase
-import pl.edu.uwr.pum.gardenway.NoteEntity
 import pl.edu.uwr.pum.gardenway.PlantEntity
 
 class PlantViewModel(application: Application) : AndroidViewModel(application) {
-    private val db : GardenRoomDatabase
-    val getAllPlants : LiveData<List<PlantEntity>>
+    private val db: GardenRoomDatabase
+    val plants: LiveData<List<PlantEntity>>
 
     init {
         db = GardenRoomDatabase.getDatabase(application)
-        getAllPlants = db.plantDao().getPlants()
+        plants = db.plantDao().getPlants()
     }
 
-    fun insert(plantEntity : PlantEntity) {
+    fun insert(plantEntity: PlantEntity) {
         viewModelScope.launch {
             db.plantDao().insert(plantEntity)
         }
     }
 
-    fun delete(id : Long) {
+    fun delete(id: Long) {
         viewModelScope.launch {
             db.plantDao().delete(id)
         }
@@ -36,15 +35,15 @@ class PlantViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getNumberOfPlants() : Int {
+    fun getNumberOfPlants(): Int {
         return db.plantDao().getNumberOfPlants()
     }
 
-    fun getNumberOfSpecies() : Int {
+    fun getNumberOfSpecies(): Int {
         return db.plantDao().getNumberOfSpecies()
     }
 
-    fun getTotalKnownCost() : Float{
+    fun getTotalKnownCost(): Float {
         return db.plantDao().getTotalKnownCost()
     }
 }

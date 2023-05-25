@@ -17,5 +17,9 @@
         android:id="@id/calendarFragment"
         android:icon="@drawable/ic_launcher_foreground"
         android:title="Calendar" />
+    <item
+        android:id="@id/forecastFragment"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="Forecast" />
 
 </menu>

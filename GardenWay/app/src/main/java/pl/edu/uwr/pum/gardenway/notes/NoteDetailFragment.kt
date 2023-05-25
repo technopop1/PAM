@@ -18,7 +18,11 @@ import pl.edu.uwr.pum.gardenway.R
 class NoteDetailFragment : Fragment() {
     private val notesViewModel: NotesViewModel by viewModels()
 
-    override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         val view = inflater.inflate(R.layout.fragment_note_detail, container, false)
         val noteTitle: EditText = view.findViewById(R.id.note_title)
@@ -36,10 +40,12 @@ class NoteDetailFragment : Fragment() {
     }
 
     private fun setDeleteButtonListener(view: View) {
-        val deleteLayout : ConstraintLayout = view.findViewById(R.id.deleteLayout)
+        val deleteLayout: ConstraintLayout = view.findViewById(R.id.deleteLayout)
         deleteLayout.setOnClickListener {
             notesViewModel.delete(arguments?.getLong("ID_KEY")!!)
-            notesViewModel.getAllNotes.observe(viewLifecycleOwner, Observer { notesViewModel.getAllNotes })
+            notesViewModel.getAllNotes.observe(
+                viewLifecycleOwner,
+                Observer { notesViewModel.getAllNotes })
             if (arguments?.get("NOTE_CALENDAR_STATE")?.equals("calendar_route") == true) {
                 Navigation.findNavController(view)
                     .navigate(NoteDetailFragmentDirections.actionNoteDetailFragmentToCalendarFragment())
@@ -51,7 +57,12 @@ class NoteDetailFragment : Fragment() {
     }
 
     // back and update element from edit texts
-    private fun backToListOfPlants( view: View, noteTitle: EditText, noteCreationDate: TextView, noteDescription : TextView) {
+    private fun backToListOfPlants(
+        view: View,
+        noteTitle: EditText,
+        noteCreationDate: TextView,
+        noteDescription: TextView
+    ) {
         view.findViewById<FloatingActionButton>(R.id.fab_to_fragmentListOfPlants)
             .setOnClickListener {
                 Thread {

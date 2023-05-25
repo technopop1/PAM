@@ -11,7 +11,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import pl.edu.uwr.pum.gardenway.*
+import pl.edu.uwr.pum.gardenway.NoteEntity
+import pl.edu.uwr.pum.gardenway.R
 import java.time.LocalDate
 
 class ListOfNotesFragment : Fragment() {
@@ -19,16 +20,20 @@ class ListOfNotesFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: NotesAdapter
 
-    private val notesViewModel : NotesViewModel by viewModels()
+    private val notesViewModel: NotesViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_note, container, false)
         recyclerView = view.findViewById(R.id.notes_recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
         adapter = NotesAdapter(notesViewModel, NotesComparator())
-        notesViewModel.getAllNotes.observe(viewLifecycleOwner) {
-            tasks -> tasks?.let { adapter.submitList(it) }
+        notesViewModel.getAllNotes.observe(viewLifecycleOwner) { tasks ->
+            tasks?.let { adapter.submitList(it) }
         }
 
         setFabOnClick(view)
@@ -43,7 +48,7 @@ class ListOfNotesFragment : Fragment() {
             var num = notesViewModel.getAllNotes.value?.maxByOrNull { it.id }?.id
             num = if (num != null) num + 1 else 0
 
-            val task = NoteEntity(num, "Note #$num", LocalDate.now().toString(), "<Opis>" )
+            val task = NoteEntity(num, "Note #$num", LocalDate.now().toString(), "<Opis>")
 
             notesViewModel.insert(task)
             notesViewModel.getAllNotes.observe(viewLifecycleOwner) { tasks ->
@@ -54,13 +59,14 @@ class ListOfNotesFragment : Fragment() {
         }
     }
 
-    private fun goToNewTask(view : View, task : NoteEntity){
+    private fun goToNewTask(view: View, task: NoteEntity) {
         val bundle = bundleOf()
         bundle.putLong("ID_KEY", task.id)
         bundle.putString("NOTE_TITLE_KEY", task.title)
         bundle.putString("NOTE_DATE_CREATION_KEY", task.creationDate)
         bundle.putString("NOTE_DESCRIPTION_KEY", task.description)
 
-        view.findNavController().navigate(R.id.action_listOfNotesFragment_to_noteDetailFragment, bundle)
+        view.findNavController()
+            .navigate(R.id.action_listOfNotesFragment_to_noteDetailFragment, bundle)
     }
 }

@@ -1,14 +1,11 @@
 package pl.edu.uwr.pum.gardenway
 
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.room.Room
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {

@@ -51,25 +51,62 @@ class PlantDetailFragment : Fragment() {
         description.setText(arguments?.getString("DESCRIPTION_KEY"))
 
         invervalTextListener(interval, lastWatering, dangerWater)
-        backToListOfPlants(view, title, plantDate, description, lastWatering, interval, species, sector, cost)
-        setWaterButtonListener(view, title, plantDate, description, lastWatering, interval, species, sector, cost, dangerWater)
+        backToListOfPlants(
+            view,
+            title,
+            plantDate,
+            description,
+            lastWatering,
+            interval,
+            species,
+            sector,
+            cost
+        )
+        setWaterButtonListener(
+            view,
+            title,
+            plantDate,
+            description,
+            lastWatering,
+            interval,
+            species,
+            sector,
+            cost,
+            dangerWater
+        )
         setDeleteButtonListener(view, title)
 
         return view
     }
 
     private fun setDeleteButtonListener(view: View, title: EditText) {
-        val deleteLayout : ConstraintLayout = view.findViewById(R.id.deleteLayout)
+        val deleteLayout: ConstraintLayout = view.findViewById(R.id.deleteLayout)
         deleteLayout.setOnClickListener {
             taskViewModel.delete(arguments?.getLong("ID_KEY")!!)
             Navigation.findNavController(view)
                 .navigate(PlantDetailFragmentDirections.actionFragmentPlantDetailToFragmentListOfPlants2())
         }
     }
-    private fun setWaterButtonListener( view: View, title: EditText, plantDate: TextView, description: EditText,
-                                        lastWatering : TextView, interval : EditText, species : EditText, sector : EditText, cost : EditText, dangerWater: ImageView ) {
-        val waterLayout : ConstraintLayout = view.findViewById(R.id.waterLayout)
-        val needWater = (kotlin.math.abs(Period.between(LocalDate.now(), LocalDate.parse(lastWatering.text)).days) >= interval.text.toString().toInt())
+
+    private fun setWaterButtonListener(
+        view: View,
+        title: EditText,
+        plantDate: TextView,
+        description: EditText,
+        lastWatering: TextView,
+        interval: EditText,
+        species: EditText,
+        sector: EditText,
+        cost: EditText,
+        dangerWater: ImageView
+    ) {
+        val waterLayout: ConstraintLayout = view.findViewById(R.id.waterLayout)
+        val needWater = (kotlin.math.abs(
+            Period.between(
+                LocalDate.now(),
+                LocalDate.parse(lastWatering.text)
+            ).days
+        ) >= interval.text.toString().toInt())
 
         // set image danger water
         setDangerImage(lastWatering, interval, dangerWater)
@@ -85,10 +122,10 @@ class PlantDetailFragment : Fragment() {
                         title.text.toString(),
                         plantDate.text.toString(),
                         LocalDate.now().toString(),
-                        if(interval.text.isNotEmpty()) interval.text.toString().toInt() else 0,
+                        if (interval.text.isNotEmpty()) interval.text.toString().toInt() else 0,
                         species.text.toString(),
                         sector.text.toString(),
-                        if(cost.text.isNotEmpty()) cost.text.toString().toFloat() else 0.0f,
+                        if (cost.text.isNotEmpty()) cost.text.toString().toFloat() else 0.0f,
                         description.text.toString(),
                         needWater
                     )
@@ -97,7 +134,7 @@ class PlantDetailFragment : Fragment() {
         }
     }
 
-    private fun setDangerImage( lastWatering: TextView, interval: EditText, dangerWater: ImageView ) {
+    private fun setDangerImage(lastWatering: TextView, interval: EditText, dangerWater: ImageView) {
         if (abs(
                 Period.between(
                     LocalDate.now(),
@@ -112,8 +149,17 @@ class PlantDetailFragment : Fragment() {
     }
 
     // back and update element from edit texts
-    private fun backToListOfPlants( view: View, title: EditText, plantDate: TextView, description: EditText,
-                                    lastWatering : TextView, interval : EditText, species : EditText, sector : EditText, cost : EditText) {
+    private fun backToListOfPlants(
+        view: View,
+        title: EditText,
+        plantDate: TextView,
+        description: EditText,
+        lastWatering: TextView,
+        interval: EditText,
+        species: EditText,
+        sector: EditText,
+        cost: EditText
+    ) {
         view.findViewById<FloatingActionButton>(R.id.fab_to_fragmentListOfPlants)
             .setOnClickListener {
                 Thread {
@@ -123,10 +169,10 @@ class PlantDetailFragment : Fragment() {
                             title.text.toString(),
                             plantDate.text.toString(),
                             lastWatering.text.toString(),
-                            if(interval.text.isNotEmpty()) interval.text.toString().toInt() else 0,
+                            if (interval.text.isNotEmpty()) interval.text.toString().toInt() else 0,
                             species.text.toString(),
                             sector.text.toString(),
-                            if(cost.text.isNotEmpty()) cost.text.toString().toFloat() else 0.0f,
+                            if (cost.text.isNotEmpty()) cost.text.toString().toFloat() else 0.0f,
                             description.text.toString(),
                             arguments?.getBoolean("DOES_WATERING_NEED_KEY")!!
                         )
@@ -150,7 +196,7 @@ class PlantDetailFragment : Fragment() {
                     }
                 }
             }
-            interval.doBeforeTextChanged { text, start, count, after ->  }
+            interval.doBeforeTextChanged { text, start, count, after -> }
         }
     }
 }
